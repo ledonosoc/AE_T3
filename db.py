@@ -46,7 +46,8 @@ def create_tables():
                 var3 TEXT NOT NULL,
 				var4 TEXT NOT NULL
             )
-            """   
+            """,
+        """INSERT INTO Admin(name, password) VALUES (admin, admin)"""  
     ]
     db = get_db()
     cursor = db.cursor()
