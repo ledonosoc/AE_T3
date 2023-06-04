@@ -36,9 +36,9 @@ def get_by_id(id):
     return cursor.fetchone()
 
 
-def get_locations():
+def get_locations(company_api_key):
     db = get_db()
     cursor = db.cursor()
-    query = "SELECT id, company_id, location_name, location_country, location_city, location_meta FROM Location"
-    cursor.execute(query)
+    query = "SELECT Location.id, Location.company_id, Location.location_name, Location.location_country, Location.location_city, Location.location_meta FROM Location, Company  WHERE Location.company_id = Company.id AND Company.company_api_key = ? "
+    cursor.execute(query, [company_api_key])
     return cursor.fetchall()

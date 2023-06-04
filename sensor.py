@@ -36,9 +36,9 @@ def get_by_id(id):
     return cursor.fetchone()
 
 
-def get_sensors():
+def get_sensors(company_api_key):
     db = get_db()
     cursor = db.cursor()
-    query = "SELECT id, location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key FROM sensor"
-    cursor.execute(query)
+    query = "SELECT Sensor.id, Sensor.location_id, Sensor.sensor_name, Sensor.sensor_category, Sensor.sensor_meta, Sensor.sensor_api_key FROM Sensor, Location, Company WHERE Sensor.location_id = Location.id AND Location.company_id = Company.id AND Company.company_api_key = ? "
+    cursor.execute(query, [company_api_key])
     return cursor.fetchall()
