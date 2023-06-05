@@ -1,7 +1,7 @@
 from db import get_db
 
 
-def insert_sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key):
+def insert_sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key, company_api_key):
     db = get_db()
     cursor = db.cursor()
     statement = "INSERT INTO sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key) VALUES (?, ?, ?, ?, ?)"

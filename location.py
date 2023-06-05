@@ -1,7 +1,7 @@
 from db import get_db
 
 
-def insert_location(company_id, location_name, location_country, location_city, location_meta):
+def insert_location(company_id, location_name, location_country, location_city, location_meta, company_api_key):
     db = get_db()
     cursor = db.cursor()
     statement = "INSERT INTO Location(company_id, location_name, location_country, location_city, location_meta) VALUES (?, ?, ?, ?, ?)"
@@ -19,20 +19,20 @@ def update_location(id, company_id, location_name, location_country, location_ci
     return True
 
 
-def delete_location(id):
+def delete_location(id, company_api_key):
     db = get_db()
     cursor = db.cursor()
-    statement = "DELETE FROM Location WHERE id = ?"
-    cursor.execute(statement, [id])
+    statement = "DELETE FROM Location WHERE id = ? AND company_api_key = ?"
+    cursor.execute(statement, [id, company_api_key])
     db.commit()
     return True
 
 
-def get_by_id(id):
+def get_by_id(id, company_api_key):
     db = get_db()
     cursor = db.cursor()
-    statement = "SELECT id, company_id, location_name, location_country, location_city, location_meta FROM Location WHERE id = ?"
-    cursor.execute(statement, [id])
+    statement = "SELECT id, company_id, location_name, location_country, location_city, location_meta FROM Location WHERE id = ? AND company_api_key = ?"
+    cursor.execute(statement, [id, company_api_key])
     return cursor.fetchone()
 
 

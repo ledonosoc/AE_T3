@@ -17,6 +17,33 @@ def insert_company():
     result = admin.insert_company(company_name, company_api_key)
     return jsonify(result)
 
+@app.route("api/v1/company/<id>", methods=["GET"])
+def get_company_by_id(id):
+    company_details = request.get_json()
+    company_api_key = company_details["company_api_key"]
+    data_company = admin.get_by_id(id, company_api_key)
+    return jsonify(data_company)
+
+@app.route("api/v1/location/<id>", methods=["GET"])
+def get_location_by_id(id):
+    location_details = request.get_json()
+    company_api_key = location_details["company_api_key"]
+    data_location = location.get_by_id(id, company_api_key)
+    return jsonify(data_location)
+
+@app.route("api/v1/sensor/<id>", methods=["GET"])
+def get_company_by_id(id):
+    sensor_details = request.get_json()
+    company_api_key = sensor_details["company_api_key"]
+    data_sensor = sensor.get_by_id(id, company_api_key)
+    return jsonify(data_sensor)
+
+@app.route("api/v1/sensor_data/<id>", methods=["GET"])
+def get_company_by_id(id):
+    sensor_data_details = request.get_json()
+    sensor_api_key = sensor_data_details["sensor_api_key"]
+    data_sensor_data = admin.get_by_id(id, sensor_api_key)
+    return jsonify(data_sensor_data)
 
 @app.route('api/v1/companies', methods=["GET"])
 def get_companies():
@@ -45,11 +72,23 @@ def insert_location():
     location_country = location_details["location_country"]
     location_city = location_details["location_city"]
     location_meta = location_details["location_meta"]
-    result = location.insert_location(company_id, location_name, location_country, location_city, location_meta)
+    company_api_key = location_details["company_api_key"]
+    result = location.insert_location(company_id, location_name, location_country, location_city, location_meta, company_api_key)
     return jsonify(result)
 
 @app.route("api/v1/sensor", methods=["POST"])
 def insert_sensor():
+    sensor_details = request.get_json()
+    location_id = sensor_details["location_id"]
+    sensor_name = sensor_details["sensor_name"]
+    sensor_category = sensor_details["sensor_category"]
+    sensor_meta = sensor_details["sensor_meta"]
+    sensor_api_key = sensor_details["sensor_api_key"]
+    result = sensor.insert_sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key)
+    return jsonify(result)
+
+@app.route("api/v1/sensor_data", methods=["POST"])
+def insert_sensor_data():
     sensor_details = request.get_json()
     location_id = sensor_details["location_id"]
     sensor_name = sensor_details["sensor_name"]
@@ -74,12 +113,6 @@ def update_game():
 def delete_game(id):
     result = game_controller.delete_game(id)
     return jsonify(result)
-
-
-@app.route("api/v1/game/<id>", methods=["GET"])
-def get_game_by_id(id):
-    game = game_controller.get_by_id(id)
-    return jsonify(game)
 
 
 if __name__ == "__main__":
