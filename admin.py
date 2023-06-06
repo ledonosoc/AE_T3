@@ -10,11 +10,11 @@ def insert_company(company_name, company_api_key):
     return True
 
 
-def update_company(id, company_name, company_api_key):
+def update_company(id, company_name, new_company_api_key, company_api_key):
     db = get_db()
     cursor = db.cursor()
-    statement = "UPDATE Company SET company_name = ?, company_api_key = ? WHERE id = ?"
-    cursor.execute(statement, [company_name, company_api_key, id])
+    statement = "UPDATE Company SET company_name = ?, company_api_key = ? WHERE id = ?  AND company_api_key = ?"
+    cursor.execute(statement, [company_name, new_company_api_key, id, company_api_key])
     db.commit()
     return True
 
