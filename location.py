@@ -3,9 +3,8 @@ from flask import jsonify
 import admin
 
 def insert_location(company_id, location_name, location_country, location_city, location_meta, company_api_key):
-    key = jsonify({"company_id":company_id,"company_api_key":company_api_key})
-    data = admin.get_by_id(company_id,company_api_key)
-    if(data == key):
+    data = admin.get_by_id(company_id)
+    if(data[2] == company_api_key):
         db = get_db()
         cursor = db.cursor()
         statement = "INSERT INTO Location(company_id, location_name, location_country, location_city, location_meta) VALUES (?, ?, ?, ?, ?)"

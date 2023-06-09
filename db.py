@@ -41,6 +41,7 @@ def create_tables():
             """,
         """CREATE TABLE IF NOT EXISTS SensorData(
                 sensor_id INTEGER,
+                time INTEGER,
                 var1 TEXT NOT NULL,
                 var2 TEXT NOT NULL,
                 var3 TEXT NOT NULL,

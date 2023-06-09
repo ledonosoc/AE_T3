@@ -28,11 +28,11 @@ def delete_company(id, company_api_key):
     return True
 
 
-def get_by_id(id, company_api_key):
+def get_by_id(id):
     db = get_db()
     cursor = db.cursor()
-    statement = "SELECT id, company_name, company_api_key FROM Company WHERE id = ? AND company_api_key = ?"
-    cursor.execute(statement, [id, company_api_key])
+    statement = "SELECT id, company_name, company_api_key FROM Company WHERE id = ?"
+    cursor.execute(statement, [id])
     return cursor.fetchone()
 
 

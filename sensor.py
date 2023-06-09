@@ -1,10 +1,11 @@
 from db import get_db
-import location
+import location, admin
 
 
 def insert_sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key, company_api_key):
     data = location.get_by_id(location_id,company_api_key)
-    if(data["company_api_key"] == company_api_key):
+    company = admin.get_by_id(data[1])
+    if(company[2] == company_api_key):
         db = get_db()
         cursor = db.cursor()
         statement = "INSERT INTO Sensor(location_id, sensor_name, sensor_category, sensor_meta, sensor_api_key) VALUES (?, ?, ?, ?, ?)"
