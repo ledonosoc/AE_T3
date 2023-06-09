@@ -1,7 +1,8 @@
 """
+    Código adaptado de 
     API REST con Python 3 y SQLite 3
-    By Parzibyte: 
-    ** https://parzibyte.me/blog **
+    By Parzibyte
+    https://parzibyte.me/blog/2020/11/10/api-rest-python-flask-sqlite3/
 """
 
 from flask import Flask, jsonify, request, Response
